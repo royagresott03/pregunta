@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi novia?</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>💖 Tengo algo muy importante que decirte 💖</h1>
+<p>¿Quieres ser mi novia?</p>
+
+<div>
+    <button id="si" onclick="explosion()">Sí 💘</button>
+    <button id="no" onclick="crecer()">No 😢</button>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="card" id="card">
+    <h2>😍</h2>
+    <p>Sabía que dirías que sí 😜<br>
+    Te amo mucho mi vida, gracias por hacerme el hombre mas feliz del mundo ❤️</p>
+</div>
+
+<script>
+let tamaño = 1;
+
+function crecer(){
+    tamaño += 0.3;
+    document.getElementById("si").style.transform = "scale(" + tamaño + ")";
+}
+
+function explosion(){
+    const boton = document.getElementById("si");
+
+    for(let i=0; i<25; i++){
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+
+        const rect = boton.getBoundingClientRect();
+        heart.style.left = rect.left + rect.width/2 + "px";
+        heart.style.top = rect.top + rect.height/2 + "px";
+
+        heart.style.setProperty('--x', (Math.random()*300 - 150) + "px");
+        heart.style.setProperty('--y', (Math.random()*300 - 150) + "px");
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 1000);
+    }
+
+    boton.style.display = "none";
+
+    setTimeout(() => {
+        document.getElementById("overlay").classList.add("active");
+        document.getElementById("card").classList.add("active");
+    }, 400);
+}
+
+window.addEventListener('load', () => {
+    const musica = document.getElementById('musica');
+    musica.play().catch(() => {
+        document.body.addEventListener('click', () => {
+            musica.play();
+        }, { once: true });
+    });
+});
+
+</script>
+
+<audio id="musica" autoplay loop>
+  <source src="videoplayback (online-audio-converter.com).mp3" type="audio/mpeg">
+  Tu navegador no soporta audio.
+</audio>
+
+</body>
+</html>
