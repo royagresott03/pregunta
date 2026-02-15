@@ -117,3 +117,8 @@ button:hover{
     font-size:1.1em;
     line-height:1.5;
 }
+img{
+    max-width: 250px;
+    height: auto;
+    margin-bottom: 20px;
+}
